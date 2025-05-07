@@ -1,0 +1,57 @@
+﻿@page
+@model TogglAutomationServer.Pages.LogsPageModel
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+
+        <script src="~/js/logs.js" defer></script>
+        <script src="~/js/ui.js" defer></script>
+        <link rel="stylesheet" type="text/css" href="~/css/style.css"/>
+        <script src="https://cdn.tailwindcss.com"></script>
+        <title>Toggl app logs</title>
+    </head>
+    <body class="flex w-screen h-screen bg-zinc-900 flex-row items-center justify-center gap-4">
+        <div class="flex flex-col items-center">
+            <table class="select-none" id="logs-table">
+            </table>
+            <div class="flex flex-row items-center select-none">
+                <button id="back-page" onclick="back()" class="arrow-button bg-main">&lt;</button>
+                <span id="page-index" class="text-white">1</span>
+                <span class="font-bold text-white">/</span>
+                <span id="page-max" class="text-white">0</span>
+                <button id="next-page" onclick="next()" class="arrow-button bg-main">&gt;</button>
+            </div>
+        </div>
+        <div class="flex flex-col items-center gap-2">
+            <h1 class="text-white">Filters</h1>
+            <div class="flex flex-col rounded-md p-4 bg-main w-full">
+                <h2 class="text-white">Extensinos</h2>
+                <div class="flex flex-row gap-4">
+                    <button class="bg-lime-500 text-slate-800 p-1 rounded-sm" onclick="selectAll()">Select All</button>
+                    <button class="bg-rose-500 text-slate-800 p-1 rounded-sm" onclick="unselectAll()">Deselect All</button>
+                </div>
+                <div class="overflow-y-scroll h-64">
+                    @foreach(var extension in Model.Extensions)
+                    {
+                        <div>
+                            <input type="checkbox" checked class="extension-checkbox" data-extension="@extension"/>
+                            <span class="text-white">@extension</span>
+                        </div>
+                    }
+                </div>
+            </div>
+            <div class="flex flex-col rounded-md p-4 bg-main w-full">
+                <h2 class="text-white">Date</h2>
+                <p>From</p>
+                <input type="date" id="from-date"/>
+                <p>To</p>
+                <input type="date" id="to-date"/>
+            </div>
+            <button onclick="search()" class="bg-main text-white rounded-md w-full pt-1 pb-1">Search</button>
+        </div>
+    </body>
+</html>

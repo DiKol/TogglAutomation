@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+https://go.microsoft.com/fwlink/?LinkID=208121.
+-->
+<Project>
+  <PropertyGroup>
+    <_PublishTargetUrl>C:\Users\dmytro\Desktop\TogglAutomation2\TogglAutomation\TogglAutomationServer\bin\Release\net8.0\publish\</_PublishTargetUrl>
+    <History>True|2025-05-06T22:06:18.9193153Z||;True|2025-05-06T15:15:16.4026497+03:00||;True|2025-02-19T21:08:48.9061338+02:00||;True|2024-11-29T00:11:56.1116483+02:00||;True|2024-09-01T03:23:19.0026077+03:00||;True|2024-08-27T02:37:36.7898627+03:00||;False|2024-08-27T02:37:10.9395970+03:00||;True|2024-08-27T02:01:05.9462935+03:00||;True|2024-08-27T01:48:09.4467546+03:00||;True|2024-08-27T01:34:18.6280483+03:00||;True|2024-06-30T04:30:03.9780194+03:00||;True|2024-06-30T04:26:52.9542665+03:00||;True|2024-06-30T04:23:52.6606164+03:00||;True|2024-06-30T04:22:19.4966238+03:00||;True|2024-06-29T01:03:37.5072580+03:00||;True|2024-06-29T00:59:38.8137684+03:00||;</History>
+    <LastFailureDetails />
+  </PropertyGroup>
+</Project>

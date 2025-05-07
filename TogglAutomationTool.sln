@@ -1,0 +1,44 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.33516.290
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TogglAutomationServer", "TogglAutomationServer\TogglAutomationServer.csproj", "{E4D74320-410B-4B70-B6F9-7B3D62606C55}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TogglAutomationApp", "TogglAutomationApp\TogglAutomationApp.csproj", "{F5AD8142-31F5-4AFD-8073-D5059F9F46BA}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TogglAutomationAppStarter", "TogglAutomationAppStarter\TogglAutomationAppStarter.csproj", "{3F32EC6F-B608-48BB-82E8-A65F0E22208D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		DebugOnWeb|Any CPU = DebugOnWeb|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E4D74320-410B-4B70-B6F9-7B3D62606C55}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E4D74320-410B-4B70-B6F9-7B3D62606C55}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E4D74320-410B-4B70-B6F9-7B3D62606C55}.DebugOnWeb|Any CPU.ActiveCfg = DebugOnWeb|Any CPU
+		{E4D74320-410B-4B70-B6F9-7B3D62606C55}.DebugOnWeb|Any CPU.Build.0 = DebugOnWeb|Any CPU
+		{E4D74320-410B-4B70-B6F9-7B3D62606C55}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E4D74320-410B-4B70-B6F9-7B3D62606C55}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F5AD8142-31F5-4AFD-8073-D5059F9F46BA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F5AD8142-31F5-4AFD-8073-D5059F9F46BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F5AD8142-31F5-4AFD-8073-D5059F9F46BA}.DebugOnWeb|Any CPU.ActiveCfg = DebugOnWeb|Any CPU
+		{F5AD8142-31F5-4AFD-8073-D5059F9F46BA}.DebugOnWeb|Any CPU.Build.0 = DebugOnWeb|Any CPU
+		{F5AD8142-31F5-4AFD-8073-D5059F9F46BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F5AD8142-31F5-4AFD-8073-D5059F9F46BA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3F32EC6F-B608-48BB-82E8-A65F0E22208D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3F32EC6F-B608-48BB-82E8-A65F0E22208D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3F32EC6F-B608-48BB-82E8-A65F0E22208D}.DebugOnWeb|Any CPU.ActiveCfg = DebugOnWeb|Any CPU
+		{3F32EC6F-B608-48BB-82E8-A65F0E22208D}.DebugOnWeb|Any CPU.Build.0 = DebugOnWeb|Any CPU
+		{3F32EC6F-B608-48BB-82E8-A65F0E22208D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3F32EC6F-B608-48BB-82E8-A65F0E22208D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {46C1F137-B68E-427A-9281-F3533C890CFC}
+	EndGlobalSection
+EndGlobal

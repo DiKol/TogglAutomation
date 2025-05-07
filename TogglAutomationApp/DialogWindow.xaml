@@ -1,0 +1,45 @@
+<Window x:Class="TogglAutomationApp.DialogWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:local="clr-namespace:TogglAutomationApp"
+        mc:Ignorable="d"
+        AllowsTransparency="True"
+        Background="Transparent"
+        WindowStyle="None"
+        WindowStartupLocation="CenterScreen"
+        Title="Choose" Height="400" Width="400">
+    <Border CornerRadius="16" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Background="Gainsboro">
+        <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="10">
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <Border Background="White" VerticalAlignment="Stretch" BorderThickness="2" HorizontalAlignment="Stretch" Margin="5" CornerRadius="10" x:Name="BeforeCallBorder">
+                <Grid VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <Grid.RowDefinitions>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Label FontSize="30" HorizontalAlignment="Center">Work before call</Label>
+                    <Label Grid.Row="1" HorizontalAlignment="Center" FontSize="20" x:Name="BeforeCallLabel"></Label>
+                </Grid>
+            </Border>
+            <Border Background="White" VerticalAlignment="Stretch" BorderThickness="2" HorizontalAlignment="Stretch" Margin="5" CornerRadius="10" Grid.Row="1" x:Name="ForCallBorder">
+                <Grid VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <Grid.RowDefinitions>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Label FontSize="30" HorizontalAlignment="Center">Work for call</Label>
+                    <Label Grid.Row="1" HorizontalAlignment="Center" FontSize="20" x:Name="ForCallLabel"></Label>
+                </Grid>
+            </Border>
+            <Border VerticalAlignment="Stretch" BorderThickness="2" HorizontalAlignment="Stretch" Margin="5" CornerRadius="10" Grid.Row="2" BorderBrush="Gray" x:Name="DoNothingBorder" Background="White">
+                <Label VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="30">Do nothing</Label>
+            </Border>
+        </Grid>
+    </Border>
+</Window>
