@@ -84,7 +84,7 @@ namespace TogglAutomationApp
                 ProjectListView.SetSearchTest(search);
             };
 
-            ProjectListView.onClick = (project) => StartProject(project);
+            ProjectListView.onClick = (project) => SetProject(project);
 
             this.LocationChanged += (s, e) => {
                 //KeepWindowOnTop(); // Ensures it stays on top after being moved
@@ -110,11 +110,13 @@ namespace TogglAutomationApp
             public DateTime Start { get; set; }
 
             public long Id { get; set; }
+
+            public bool Active { get; set; }
         }
 
         string FormatTime(int x) => x < 10 ? $"0{x}" : x.ToString();    
 
-        private void SetProjectInfo(CurrentProjectInfoDto? project, bool fromCheckup = false)
+        private void SetProjectInfo(CurrentProjectInfoDto? project)
         {
             if(project == null)
             {
@@ -152,13 +154,11 @@ namespace TogglAutomationApp
 
             StartStopButton.Content = projectInfo == null ? "Start" : "Stop";
             CurrentProject = project;
-            if (!fromCheckup && project == null)
-            {
-                //ProjectListCombobox.SelectedIndex = -1;
-            }
         }
 
-        private async Task RefreshTask()
+
+
+       /* private async Task RefreshTask()
         {
             
             try
@@ -167,8 +167,8 @@ namespace TogglAutomationApp
                 {
                     try
                     {
-                        var currentTimer = await HttpClient.GetFromJsonAsync<CurrentProjectInfoDto>("api/v9/me/time_entries/current");
-                        Dispatcher.Invoke(() => SetProjectInfo(currentTimer, true));
+                        var project = await HttpClient.GetFromJsonAsync<CurrentProjectInfoDto>("api/v9/me/time_entries/current");
+                        Dispatcher.Invoke(() => SetProjectInfo(project));
                     }
                     catch(Exception ex)
                     {
@@ -187,7 +187,7 @@ namespace TogglAutomationApp
                 MessageBox.Show("Refresh timer crashed please restart the app");
                 Environment.Exit(0);
             }
-        }
+        }*/
 
         public static Color ColorFromHex(string hex)
         {
@@ -215,7 +215,6 @@ namespace TogglAutomationApp
                 if (Projects == null) throw new Exception();
 
                 Dispatcher.Invoke(PopulateCombobox);
-                RefreshTask();
             }
             catch
             {
@@ -224,7 +223,8 @@ namespace TogglAutomationApp
             }
         }
 
-        async void StartProject(WorkspaceProjectDto projectDto)
+
+        private async void SetProject(WorkspaceProjectDto projectDto)
         {
             var response = await HttpClient.PostAsJsonAsync($"api/v9/workspaces/{WorkspaceId}/time_entries", new
             {
@@ -241,12 +241,20 @@ namespace TogglAutomationApp
             else
             {
                 var currentProjectInfo = await response.Content.ReadFromJsonAsync<CurrentProjectInfoDto>();
-                SetProjectInfo(currentProjectInfo);
+                CurrentProject = currentProjectInfo;
+                CurrentProject.Active = true;
             }
+        }
+
+        private async void StartProject(CurrentProjectInfoDto projectDto)
+        {
+           SetProjectInfo(projectDto);
         }
 
         private async void StartStopButton_Click(object sender, System.Windows.RoutedEventArgs e)
         {
+            // here only stop now
+
             try
             {
                 if (CurrentProject == null)
@@ -255,12 +263,22 @@ namespace TogglAutomationApp
                 }
                 else
                 {
-                    var request = new HttpRequestMessage(HttpMethod.Patch, $"api/v9/workspaces/{WorkspaceId}/time_entries/{CurrentProject.Id}/stop");
-                    var response = await HttpClient.SendAsync(request);
-
-                    if (response.IsSuccessStatusCode)
+                    if (CurrentProject.Active)
                     {
-                        SetProjectInfo(null);
+                        //stop
+                        var request = new HttpRequestMessage(HttpMethod.Patch, $"api/v9/workspaces/{WorkspaceId}/time_entries/{CurrentProject.Id}/stop");
+                        var response = await HttpClient.SendAsync(request);
+
+                        if (response.IsSuccessStatusCode)
+                        {
+                            SetProjectInfo(null);
+                        }
+                        CurrentProject.Active = false;
+                    }
+                    else
+                    {
+                        //start
+                        StartProject(CurrentProject);
                     }
                 }
             }

@@ -7,7 +7,7 @@ namespace TogglAutomationServer.Controllers.Client
     [ApiController]
     public class VersionControl : ControllerBase
     {
-        public const string VERSION = "v5";
+        public const string VERSION = "v6";
 
         [HttpGet]
         public IActionResult GetCurrentVersion()

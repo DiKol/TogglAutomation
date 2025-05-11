@@ -21,6 +21,9 @@
     <Compile Update="TimerWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="TrackWindow\TrackWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Page Update="ProjectList.xaml">

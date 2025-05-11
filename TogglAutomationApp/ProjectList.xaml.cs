@@ -41,7 +41,7 @@ namespace TogglAutomationApp
             var showList = _project.Where(project => { 
                 foreach(char c in text)
                 {
-                    if (!project.Name.Contains(c)) return false;
+                    if (!project.Name.StartsWith(c)) return false;
                 }
                 return true;
             }).Take(8);

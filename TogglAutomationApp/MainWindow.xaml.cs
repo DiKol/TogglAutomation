@@ -8,20 +8,20 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Forms;
 using MessageBox = System.Windows.MessageBox;
-using Busylight;
 using System.Collections.Generic;
 using System.Windows.Interop;
 using System.Net.WebSockets;
 using TogglAutomationAppStarter;
 using System.Text.Json.Nodes;
 using System.Net.Http.Json;
+using CollectionViewMVVM.ViewModels;
 
 namespace TogglAutomationApp
 {
     public partial class MainWindow
     {
-        private TimerWindow? TimerWindow = null;
-        private static KuandoSDK KuandoSDK = new("SDK");
+        private TrackWindow.TrackWindow? TimerWindow = null;
+
         private static string SaveFile = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Toggl Automation", "save.txt");
         private NotifyIcon? _notifyIcon;
         private static string? Version = VersionFile.GetVersion();
@@ -49,24 +49,9 @@ namespace TogglAutomationApp
                     #endif
                 }
 
-                var bls_sdk = new BusylightHubDataSourceParameter()
-                {
-                    DataSourceName = "SDK",
-                    eventnames = new Dictionary<string, BusylightEventType>()
-                    {
-                        { "Light", new BusylightEventType() { IsAlertPriority=false, EventNames= new List<string>() { "Pulse", "Green", "Red", "Yellow", "Off", "Alert" } } },
-                        { "Alert", new BusylightEventType() { IsAlertPriority=true, EventNames= new List<string>() { "Alert", "Other Notification" } } },
-                    }
-                };
+             
 
-                var priority_SDK = new BusylightHubPriorityParameter() { enabled = true, IsAlertPriority = false, sender = "SDK", eventtype = null, eventnames = new List<string>() };
 
-                KuandoSDK.LightEventType = "Other Notification";
-                KuandoSDK.AlertEventType = "Alert";
-                KuandoSDK.PulseEventType = "Other Notification";
-
-                KuandoSDK.RegisterDataSource(bls_sdk);
-                KuandoSDK.CreateInitialPriority(priority_SDK);
             };
         }
 
@@ -125,23 +110,6 @@ namespace TogglAutomationApp
 
                 var color = data["color"]!.GetValue<string>();
                 var pusle = data["pulse"]!.GetValue<bool>();
-
-                BusylightColor sdkColor = BusylightColor.Green;
-                if (color == "yellow") sdkColor = BusylightColor.Yellow;
-                if (color == "red") sdkColor = BusylightColor.Red;
-                if (color == "blue") sdkColor = BusylightColor.Blue;
-                if (color == "green") sdkColor = BusylightColor.Green;
-
-
-                Console.WriteLine("Color:{0} Pulse:{1} ({2}, {3}, {4})", color, pusle, sdkColor.RedRgbValue, sdkColor.GreenRgbValue, sdkColor.BlueRgbValue);
-                if (pusle)
-                {
-                    KuandoSDK.Pulse(sdkColor);
-                }
-                else
-                {
-                    KuandoSDK.Light(sdkColor);
-                }
             }
             else if(type == "toast")
             {
@@ -192,6 +160,12 @@ namespace TogglAutomationApp
         private async Task TryAuth(string email, string password, string extension, bool remember)
         {
             Dispatcher.Invoke(() => IsEnabled = false);
+
+            TimerWindow = new TrackWindow.TrackWindow() { DataContext = new MainViewModel() };
+            TimerWindow.Show();
+            Hide();
+            ShowInTaskbar = false;
+            return;
             try
             {
                 using var client = new HttpClient();
@@ -244,7 +218,7 @@ namespace TogglAutomationApp
                     }
                 }
                 catch { 
-                    Console.WriteLine("e1");
+                    Console.WriteLine("e1 continue");
                 }
 
                 Hide();
@@ -275,7 +249,7 @@ namespace TogglAutomationApp
                 Console.WriteLine("Starting ws");
                 StartWs(sessionId);
 
-                TimerWindow = new TimerWindow(email, password);
+                TimerWindow = new TrackWindow.TrackWindow() { DataContext = new MainViewModel() };
                 TimerWindow.Show();
 
                 Console.WriteLine("t");
